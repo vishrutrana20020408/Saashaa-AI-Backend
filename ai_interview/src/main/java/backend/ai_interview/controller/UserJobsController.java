@@ -6,6 +6,7 @@ import backend.ai_interview.entity.Job;
 import backend.ai_interview.repository.UserRepository;
 import backend.ai_interview.service.JobService;
 import backend.ai_interview.service.MockJobStore;
+import backend.ai_interview.service.NotificationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -29,11 +30,13 @@ public class UserJobsController {
     private final MockJobStore mockJobStore;
     private final JobService jobService;
     private final UserRepository userRepository;
+    private final NotificationService notificationService;
 
-    public UserJobsController(MockJobStore mockJobStore, JobService jobService, UserRepository userRepository) {
+    public UserJobsController(MockJobStore mockJobStore, JobService jobService, UserRepository userRepository, NotificationService notificationService) {
         this.mockJobStore = mockJobStore;
         this.jobService = jobService;
         this.userRepository = userRepository;
+        this.notificationService = notificationService;
     }
 
     /**
@@ -102,7 +105,37 @@ public class UserJobsController {
      */
     @PostMapping("/{jobId}/apply")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> applyForJob(@PathVariable Long jobId) {
+    public ResponseEntity<?> applyForJob(@PathVariable Long jobId, Authentication authentication) {
+        AppUser user = null;
+        if (authentication != null) {
+            String principal = authentication.getName();
+            user = userRepository.findByUserId(principal)
+                    .or(() -> userRepository.findByEmailAddress(principal))
+                    .orElse(null);
+        }
+
+        String applicantName = "Applicant";
+        if (user != null) {
+            String firstName = user.getName() != null ? user.getName().trim() : "";
+            String lastName = user.getSurname() != null ? user.getSurname().trim() : "";
+            String fullName = (firstName + " " + lastName).trim();
+            if (!fullName.isEmpty()) {
+                applicantName = fullName;
+            }
+        }
+
+        String jobTitle = "the selected job";
+        Map<String, Object> job = mockJobStore.findJobById(jobId);
+        if (job != null && job.get("title") != null) {
+            jobTitle = String.valueOf(job.get("title"));
+        }
+
+        notificationService.createNotification(
+                "New application for " + jobTitle,
+                applicantName + " has applied for " + jobTitle + ".",
+                "JOB_APPLICATION"
+        );
+
         Map<String, Object> data = new HashMap<>();
         data.put("applicationId", System.currentTimeMillis());
         data.put("jobId", jobId);

@@ -163,8 +163,12 @@ public class AdminDashboardController {
      */
     @PostMapping("/jobs")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponse<Map<String, Object>>> createJob(@RequestBody Map<String, Object> jobData) {
-        Map<String, Object> data = mockJobStore.addJob(jobData);
+    public ResponseEntity<ApiResponse<Map<String, Object>>> createJob(
+            @RequestBody Map<String, Object> jobData,
+            Authentication authentication
+    ) {
+        String principal = authentication != null ? authentication.getName() : null;
+        Map<String, Object> data = mockJobStore.addJob(jobData, principal);
         return ResponseEntity.ok(ApiResponse.success("Job created successfully", data));
     }
 
@@ -175,13 +179,19 @@ public class AdminDashboardController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<Map<String, Object>>> updateJob(
             @PathVariable("jobId") Long jobId,
-            @RequestBody Map<String, Object> jobData
+            @RequestBody Map<String, Object> jobData,
+            Authentication authentication
     ) {
-        Map<String, Object> data = mockJobStore.updateJob(jobId, jobData);
-        if (data == null) {
-            return ResponseEntity.status(404).body(ApiResponse.fail("Job not found"));
+        String principal = authentication != null ? authentication.getName() : null;
+        try {
+            Map<String, Object> data = mockJobStore.updateJob(jobId, jobData, principal);
+            if (data == null) {
+                return ResponseEntity.status(404).body(ApiResponse.fail("Job not found"));
+            }
+            return ResponseEntity.ok(ApiResponse.success("Job updated successfully", data));
+        } catch (IllegalAccessException ex) {
+            return ResponseEntity.status(403).body(ApiResponse.fail(ex.getMessage()));
         }
-        return ResponseEntity.ok(ApiResponse.success("Job updated successfully", data));
     }
 
     /**
@@ -189,14 +199,22 @@ public class AdminDashboardController {
      */
     @DeleteMapping("/jobs/{jobId}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponse<Map<String, Object>>> deleteJob(@PathVariable("jobId") Long jobId) {
-        boolean deleted = mockJobStore.deleteJob(jobId);
-        if (!deleted) {
-            return ResponseEntity.status(404).body(ApiResponse.fail("Job not found"));
+    public ResponseEntity<ApiResponse<Map<String, Object>>> deleteJob(
+            @PathVariable("jobId") Long jobId,
+            Authentication authentication
+    ) {
+        String principal = authentication != null ? authentication.getName() : null;
+        try {
+            boolean deleted = mockJobStore.deleteJob(jobId, principal);
+            if (!deleted) {
+                return ResponseEntity.status(404).body(ApiResponse.fail("Job not found"));
+            }
+            Map<String, Object> data = new HashMap<>();
+            data.put("jobId", jobId);
+            return ResponseEntity.ok(ApiResponse.success("Job deleted successfully", data));
+        } catch (IllegalAccessException ex) {
+            return ResponseEntity.status(403).body(ApiResponse.fail(ex.getMessage()));
         }
-        Map<String, Object> data = new HashMap<>();
-        data.put("jobId", jobId);
-        return ResponseEntity.ok(ApiResponse.success("Job deleted successfully", data));
     }
 
     /**

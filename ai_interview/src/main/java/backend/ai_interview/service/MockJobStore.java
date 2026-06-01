@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
@@ -16,18 +17,18 @@ public class MockJobStore {
     private final AtomicLong idGenerator = new AtomicLong(1);
 
     public MockJobStore() {
-        jobs.add(createJob("Frontend Engineer", "Build responsive user interfaces", true, "TECH"));
-        jobs.add(createJob("Backend Engineer", "Develop REST APIs and services", false, "TECH"));
-        jobs.add(createJob("Data Scientist", "Analyze hiring data and build models", false, "TECH"));
-        jobs.add(createJob("HR Manager", "Manage recruitment and employee relations", false, "NON_TECH"));
-        jobs.add(createJob("Content Writer", "Create engaging content for marketing", false, "NON_TECH"));
+        jobs.add(createJob("Frontend Engineer", "Build responsive user interfaces", true, "TECH", "system"));
+        jobs.add(createJob("Backend Engineer", "Develop REST APIs and services", false, "TECH", "system"));
+        jobs.add(createJob("Data Scientist", "Analyze hiring data and build models", false, "TECH", "system"));
+        jobs.add(createJob("HR Manager", "Manage recruitment and employee relations", false, "NON_TECH", "system"));
+        jobs.add(createJob("Content Writer", "Create engaging content for marketing", false, "NON_TECH", "system"));
     }
 
     public synchronized List<Map<String, Object>> getAllJobs() {
         return new ArrayList<>(jobs);
     }
 
-    public synchronized Map<String, Object> addJob(Map<String, Object> jobData) {
+    public synchronized Map<String, Object> addJob(Map<String, Object> jobData, String createdByAdminId) {
         Map<String, Object> job = new HashMap<>();
         job.put("id", idGenerator.getAndIncrement());
         job.put("title", jobData.getOrDefault("title", jobData.getOrDefault("jobTitle", "Untitled Job")));
@@ -52,13 +53,14 @@ public class MockJobStore {
         job.put("educationQualification", jobData.getOrDefault("educationQualification", ""));
         job.put("skillsRequired", jobData.getOrDefault("skillsRequired", ""));
         job.put("whoCanApply", jobData.getOrDefault("whoCanApply", ""));
+        job.put("createdBy", createdByAdminId != null ? createdByAdminId : "system");
         job.put("payload", jobData);
 
         jobs.add(job);
         return job;
     }
 
-    public synchronized Map<String, Object> updateJob(Long jobId, Map<String, Object> jobData) {
+    public synchronized Map<String, Object> updateJob(Long jobId, Map<String, Object> jobData, String requestingAdminId) throws IllegalAccessException {
         Map<String, Object> existingJob = jobs.stream()
                 .filter(job -> jobId.equals(job.get("id")))
                 .findFirst()
@@ -66,6 +68,10 @@ public class MockJobStore {
 
         if (existingJob == null) {
             return null;
+        }
+
+        if (!Objects.equals(String.valueOf(existingJob.getOrDefault("createdBy", "")), String.valueOf(requestingAdminId))) {
+            throw new IllegalAccessException("Only the admin who created this job can update it.");
         }
 
         existingJob.put("title", jobData.getOrDefault("title", existingJob.get("title")));
@@ -95,11 +101,32 @@ public class MockJobStore {
         return existingJob;
     }
 
-    public synchronized boolean deleteJob(Long jobId) {
-        return jobs.removeIf(job -> jobId.equals(job.get("id")));
+    public synchronized boolean deleteJob(Long jobId, String requestingAdminId) throws IllegalAccessException {
+        Map<String, Object> existingJob = jobs.stream()
+                .filter(job -> jobId.equals(job.get("id")))
+                .findFirst()
+                .orElse(null);
+
+        if (existingJob == null) {
+            return false;
+        }
+
+        if (!Objects.equals(String.valueOf(existingJob.getOrDefault("createdBy", "")), String.valueOf(requestingAdminId))) {
+            throw new IllegalAccessException("Only the admin who created this job can delete it.");
+        }
+
+        return jobs.remove(existingJob);
     }
 
-    private Map<String, Object> createJob(String title, String description, boolean recommended, String domain) {
+    public synchronized Map<String, Object> findJobById(Long jobId) {
+        return jobs.stream()
+                .filter(job -> jobId.equals(job.get("id")))
+                .findFirst()
+                .map(HashMap::new)
+                .orElse(null);
+    }
+
+    private Map<String, Object> createJob(String title, String description, boolean recommended, String domain, String createdBy) {
         Map<String, Object> job = new HashMap<>();
         job.put("id", idGenerator.getAndIncrement());
         job.put("title", title);
@@ -108,6 +135,7 @@ public class MockJobStore {
         job.put("status", "OPEN");
         job.put("domain", domain);
         job.put("postedAt", java.time.LocalDate.now().toString());
+        job.put("createdBy", createdBy);
         return job;
     }
 }
