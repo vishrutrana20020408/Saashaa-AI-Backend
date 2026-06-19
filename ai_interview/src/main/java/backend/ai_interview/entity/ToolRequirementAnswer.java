@@ -73,7 +73,7 @@ public class ToolRequirementAnswer {
      * Optional notes provided by the user
      */
     @Lob
-    @Column(name = "notes", columnDefinition = "LONGTEXT")
+    @Column(name = "notes", columnDefinition = "TEXT")
     private String notes;
 
     /**

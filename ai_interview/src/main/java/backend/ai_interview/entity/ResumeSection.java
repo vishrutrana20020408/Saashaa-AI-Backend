@@ -72,14 +72,14 @@ public class ResumeSection {
      * Structured JSON data for this section
      */
     @Lob
-    @Column(name = "content_json", columnDefinition = "LONGTEXT")
+    @Column(name = "content_json", columnDefinition = "TEXT")
     private String contentJson;
 
     /**
      * Plain text representation of the section
      */
     @Lob
-    @Column(name = "plain_text", columnDefinition = "LONGTEXT")
+    @Column(name = "plain_text", columnDefinition = "TEXT")
     private String plainText;
 
     /**

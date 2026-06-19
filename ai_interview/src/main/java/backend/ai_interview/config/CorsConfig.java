@@ -44,7 +44,8 @@ public class CorsConfig {
                                 "http://172.28.*.*:3000",
                                 "http://172.29.*.*:3000",
                                 "http://172.30.*.*:3000",
-                                "http://172.31.*.*:3000"
+                                "http://172.31.*.*:3000",
+                                "https://*.vercel.app"
                         )
 
                         // ✅ Needed for onboarding + resume upload + all APIs

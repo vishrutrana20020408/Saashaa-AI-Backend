@@ -105,7 +105,7 @@ public class JobApplication {
      * Job description used for tailoring
      */
     @Lob
-    @Column(name = "job_description", columnDefinition = "LONGTEXT")
+    @Column(name = "job_description", columnDefinition = "TEXT")
     private String jobDescription;
 
     /**
@@ -131,7 +131,7 @@ public class JobApplication {
      * Optional notes from the user
      */
     @Lob
-    @Column(name = "notes", columnDefinition = "LONGTEXT")
+    @Column(name = "notes", columnDefinition = "TEXT")
     private String notes;
 
     /**

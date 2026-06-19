@@ -203,21 +203,21 @@ public class InterviewSession {
      * Job description text if supplied.
      */
     @Lob
-    @Column(name = "job_description", columnDefinition = "LONGTEXT")
+    @Column(name = "job_description", columnDefinition = "TEXT")
     private String jobDescription;
 
     /**
      * Newline-separated GitHub URLs used as input context.
      */
     @Lob
-    @Column(name = "github_urls", columnDefinition = "LONGTEXT")
+    @Column(name = "github_urls", columnDefinition = "TEXT")
     private String githubUrls;
 
     /**
      * Optional short feedback summary after completion.
      */
     @Lob
-    @Column(name = "feedback_summary", columnDefinition = "LONGTEXT")
+    @Column(name = "feedback_summary", columnDefinition = "TEXT")
     private String feedbackSummary;
 
     /**

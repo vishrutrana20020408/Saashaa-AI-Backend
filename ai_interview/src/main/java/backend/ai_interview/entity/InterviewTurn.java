@@ -90,7 +90,7 @@ public class InterviewTurn {
      * The AI-generated or system-generated question text.
      */
     @Lob
-    @Column(name = "question", nullable = false, columnDefinition = "LONGTEXT")
+    @Column(name = "question", nullable = false, columnDefinition = "TEXT")
     private String question;
 
     /**
@@ -118,14 +118,14 @@ public class InterviewTurn {
      * User answer text.
      */
     @Lob
-    @Column(name = "answer", columnDefinition = "LONGTEXT")
+    @Column(name = "answer", columnDefinition = "TEXT")
     private String answer;
 
     /**
      * Speech transcript if answer came from audio.
      */
     @Lob
-    @Column(name = "transcript", columnDefinition = "LONGTEXT")
+    @Column(name = "transcript", columnDefinition = "TEXT")
     private String transcript;
 
     /**
@@ -182,28 +182,28 @@ public class InterviewTurn {
      * Optional short feedback summary for quick UI rendering.
      */
     @Lob
-    @Column(name = "feedback_summary", columnDefinition = "LONGTEXT")
+    @Column(name = "feedback_summary", columnDefinition = "TEXT")
     private String feedbackSummary;
 
     /**
      * Optional hint text given for this turn.
      */
     @Lob
-    @Column(name = "hint_text", columnDefinition = "LONGTEXT")
+    @Column(name = "hint_text", columnDefinition = "TEXT")
     private String hintText;
 
     /**
      * Optional sample answer text shown to candidate.
      */
     @Lob
-    @Column(name = "sample_answer", columnDefinition = "LONGTEXT")
+    @Column(name = "sample_answer", columnDefinition = "TEXT")
     private String sampleAnswer;
 
     /**
      * Optional follow-up question suggestion from AI.
      */
     @Lob
-    @Column(name = "follow_up_question", columnDefinition = "LONGTEXT")
+    @Column(name = "follow_up_question", columnDefinition = "TEXT")
     private String followUpQuestion;
 
     /**

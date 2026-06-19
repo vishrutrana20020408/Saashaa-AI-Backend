@@ -86,14 +86,14 @@ public class ResumeVersion {
      * Raw extracted full text from uploaded resume
      */
     @Lob
-    @Column(name = "raw_text", columnDefinition = "LONGTEXT")
+    @Column(name = "raw_text", columnDefinition = "TEXT")
     private String rawText;
 
     /**
      * Structured parsed content stored as JSON
      */
     @Lob
-    @Column(name = "structured_content_json", columnDefinition = "LONGTEXT")
+    @Column(name = "structured_content_json", columnDefinition = "TEXT")
     private String structuredContentJson;
 
     /**
@@ -105,7 +105,7 @@ public class ResumeVersion {
      * - user/admin profile generation
      */
     @Lob
-    @Column(name = "profile_snapshot_json", columnDefinition = "LONGTEXT")
+    @Column(name = "profile_snapshot_json", columnDefinition = "TEXT")
     private String profileSnapshotJson;
 
     /**
@@ -117,7 +117,7 @@ public class ResumeVersion {
      * - file format understanding
      */
     @Lob
-    @Column(name = "format_metadata_json", columnDefinition = "LONGTEXT")
+    @Column(name = "format_metadata_json", columnDefinition = "TEXT")
     private String formatMetadataJson;
 
     /**

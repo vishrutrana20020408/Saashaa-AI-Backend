@@ -129,21 +129,21 @@ public class InterviewEvaluation {
      * Short textual summary.
      */
     @Lob
-    @Column(name = "summary", columnDefinition = "LONGTEXT")
+    @Column(name = "summary", columnDefinition = "TEXT")
     private String summary;
 
     /**
      * Main evaluation feedback.
      */
     @Lob
-    @Column(name = "feedback", columnDefinition = "LONGTEXT")
+    @Column(name = "feedback", columnDefinition = "TEXT")
     private String feedback;
 
     /**
      * Explanation or reasoning for score.
      */
     @Lob
-    @Column(name = "explanation", columnDefinition = "LONGTEXT")
+    @Column(name = "explanation", columnDefinition = "TEXT")
     private String explanation;
 
     /**
@@ -151,38 +151,38 @@ public class InterviewEvaluation {
      * Stored as newline-separated text for simplicity.
      */
     @Lob
-    @Column(name = "strengths", columnDefinition = "LONGTEXT")
+    @Column(name = "strengths", columnDefinition = "TEXT")
     private String strengths;
 
     @Lob
-    @Column(name = "weaknesses", columnDefinition = "LONGTEXT")
+    @Column(name = "weaknesses", columnDefinition = "TEXT")
     private String weaknesses;
 
     @Lob
-    @Column(name = "improvement_suggestions", columnDefinition = "LONGTEXT")
+    @Column(name = "improvement_suggestions", columnDefinition = "TEXT")
     private String improvementSuggestions;
 
     @Lob
-    @Column(name = "detected_skills", columnDefinition = "LONGTEXT")
+    @Column(name = "detected_skills", columnDefinition = "TEXT")
     private String detectedSkills;
 
     @Lob
-    @Column(name = "missing_concepts", columnDefinition = "LONGTEXT")
+    @Column(name = "missing_concepts", columnDefinition = "TEXT")
     private String missingConcepts;
 
     @Lob
-    @Column(name = "rubric_notes", columnDefinition = "LONGTEXT")
+    @Column(name = "rubric_notes", columnDefinition = "TEXT")
     private String rubricNotes;
 
     /**
      * Optional next-step suggestion or follow-up.
      */
     @Lob
-    @Column(name = "next_step_suggestion", columnDefinition = "LONGTEXT")
+    @Column(name = "next_step_suggestion", columnDefinition = "TEXT")
     private String nextStepSuggestion;
 
     @Lob
-    @Column(name = "follow_up_question", columnDefinition = "LONGTEXT")
+    @Column(name = "follow_up_question", columnDefinition = "TEXT")
     private String followUpQuestion;
 
     /**
