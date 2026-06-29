@@ -178,6 +178,13 @@ public class InterviewSessionService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
+    public List<InterviewSessionResponse> getPendingSessionsByUser(Long userId) {
+        return interviewSessionRepository.findByUserIdAndStatusInOrderByCreatedAtDesc(userId, getPendingStatuses()).stream()
+                .map(session -> mapSessionResponse(session, null, false))
+                .toList();
+    }
+
     /**
      * Get all active interview sessions for a specific admin.
      */
@@ -186,6 +193,21 @@ public class InterviewSessionService {
         return interviewSessionRepository.findByAdminIdOrderByCreatedAtDesc(adminId).stream()
                 .map(session -> mapSessionResponse(session, null, false))
                 .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<InterviewSessionResponse> getPendingSessionsByAdmin(Long adminId) {
+        return interviewSessionRepository.findByAdminIdAndStatusInOrderByCreatedAtDesc(adminId, getPendingStatuses()).stream()
+                .map(session -> mapSessionResponse(session, null, false))
+                .toList();
+    }
+
+    private static List<InterviewStatus> getPendingStatuses() {
+        return List.of(
+                InterviewStatus.CREATED,
+                InterviewStatus.ACTIVE,
+                InterviewStatus.PAUSED
+        );
     }
 
     /**

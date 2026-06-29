@@ -74,6 +74,16 @@ public interface InterviewSessionRepository extends JpaRepository<InterviewSessi
     List<InterviewSession> findByAdminIdAndInterviewModeOrderByCreatedAtDesc(Long adminId, InterviewMode interviewMode);
 
     /**
+     * Fetch pending sessions for a specific user.
+     */
+    List<InterviewSession> findByUserIdAndStatusInOrderByCreatedAtDesc(Long userId, List<InterviewStatus> statuses);
+
+    /**
+     * Fetch pending sessions for a specific admin.
+     */
+    List<InterviewSession> findByAdminIdAndStatusInOrderByCreatedAtDesc(Long adminId, List<InterviewStatus> statuses);
+
+    /**
      * Fetch latest session for a user.
      */
     Optional<InterviewSession> findTopByUserIdOrderByCreatedAtDesc(Long userId);

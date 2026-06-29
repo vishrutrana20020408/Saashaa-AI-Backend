@@ -269,6 +269,35 @@ public class AdminDashboardController {
     }
 
     /**
+     * ADMIN PENDING INTERVIEW SESSIONS
+     * GET /api/admin/interview/sessions/pending
+     */
+    @GetMapping({"/interview/sessions/pending", "/interview/session/pending"})
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponse<List<InterviewSessionResponse>>> getAdminPendingInterviewSessions(Authentication authentication) {
+        try {
+            if (authentication == null || authentication.getName() == null) {
+                return ResponseEntity.status(401).body(ApiResponse.fail("Not authenticated"));
+            }
+
+            String principal = authentication.getName();
+            Admin admin = adminRepository.findByAdminId(principal).orElse(null);
+            if (admin == null) {
+                admin = adminRepository.findByEmailAddress(principal).orElse(null);
+            }
+
+            if (admin == null) {
+                return ResponseEntity.status(404).body(ApiResponse.fail("Admin record not found for principal: " + principal));
+            }
+
+            List<InterviewSessionResponse> sessions = interviewSessionService.getPendingSessionsByAdmin(admin.getSNo());
+            return ResponseEntity.ok(ApiResponse.success("Admin pending interview sessions fetched", sessions));
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ApiResponse.fail("Critical Error: " + ex.getClass().getSimpleName() + " - " + ex.getMessage()));
+        }
+    }
+
+    /**
      * ADMIN VALIDATE (Protected)
      * GET /api/admin/validate
      *

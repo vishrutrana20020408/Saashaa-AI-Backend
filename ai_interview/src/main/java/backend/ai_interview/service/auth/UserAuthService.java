@@ -8,6 +8,7 @@ import backend.ai_interview.exception.ApiException;
 import backend.ai_interview.repository.UserRepository;
 import backend.ai_interview.security.JwtService;
 import backend.ai_interview.security.Roles;
+import backend.ai_interview.service.auth.CaptchaVerificationService;
 
 import org.springframework.stereotype.Service;
 
@@ -25,13 +26,16 @@ public class UserAuthService {
     private final UserRepository userRepository;
     private final PasswordService passwordService;
     private final JwtService jwtService;
+    private final CaptchaVerificationService captchaVerificationService;
 
     public UserAuthService(UserRepository userRepository,
                            PasswordService passwordService,
-                           JwtService jwtService) {
+                           JwtService jwtService,
+                           CaptchaVerificationService captchaVerificationService) {
         this.userRepository = userRepository;
         this.passwordService = passwordService;
         this.jwtService = jwtService;
+        this.captchaVerificationService = captchaVerificationService;
     }
 
     /**
@@ -43,6 +47,7 @@ public class UserAuthService {
      * - Role set to USER
      */
     public AuthResponse register(UserRegisterRequest request) {
+        captchaVerificationService.verify(request.getCaptchaToken());
 
         if (userRepository.existsByEmailAddress(request.getEmailAddress())) {
             throw new ApiException("Email already registered");
@@ -70,6 +75,7 @@ public class UserAuthService {
      * - Returns JWT with role USER
      */
     public AuthResponse login(UserLoginRequest request) {
+        captchaVerificationService.verify(request.getCaptchaToken());
 
         AppUser user = userRepository.findByEmailAddress(request.getEmailAddress())
                 .orElseThrow(() -> new ApiException("Invalid user credentials"));

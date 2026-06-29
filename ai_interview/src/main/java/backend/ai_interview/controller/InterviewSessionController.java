@@ -200,6 +200,34 @@ public class InterviewSessionController {
         }
     }
 
+    @GetMapping("/pending")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    public ResponseEntity<ApiResponse<List<InterviewSessionResponse>>> getPendingSessions(
+            Authentication authentication
+    ) {
+        try {
+            AppUser user = resolveAuthenticatedUser(authentication);
+            List<InterviewSessionResponse> sessions;
+
+            if ("ADMIN".equalsIgnoreCase(user.getRole())) {
+                Admin admin = adminRepository.findByEmailAddress(user.getEmailAddress()).orElse(null);
+                if (admin != null) {
+                    sessions = interviewSessionService.getPendingSessionsByAdmin(admin.getSNo());
+                } else {
+                    sessions = List.of();
+                }
+            } else {
+                sessions = interviewSessionService.getPendingSessionsByUser(user.getSNo());
+            }
+
+            return ResponseEntity.ok(ApiResponse.success("Pending interview sessions fetched", sessions));
+        } catch (ApiException ex) {
+            return ResponseEntity.badRequest().body(ApiResponse.fail(ex.getMessage()));
+        } catch (Exception ex) {
+            return ResponseEntity.internalServerError().body(ApiResponse.fail("Failed to fetch pending sessions: " + ex.getMessage()));
+        }
+    }
+
     /**
      * Get interview session details by session id.
      * GET /api/user/interview/session/{sessionId}
