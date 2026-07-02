@@ -541,7 +541,7 @@ public class AppUser {
     // Onboarding Selections
     // ============================
 
-    @Column(name = "onb_domain")
+    @Column(name = "onboarding_domain")
     private String onboardingDomain;
 
     @Column(name = "onb_subdomain_mode")
