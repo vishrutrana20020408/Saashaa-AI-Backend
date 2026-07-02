@@ -77,14 +77,13 @@ public class UserProfile {
     @Column(name = "portfolio_url", length = 1000)
     private String portfolioUrl;
 
-    @Lob
-    @Column(name = "profile_summary")
+    @Column(name = "profile_summary", columnDefinition = "TEXT")
     private String profileSummary;
 
     @Column(name = "current_company")
     private String currentCompany;
 
-    @Column(name = "current_role")
+    @Column(name = "current_job_role")
     private String currentRole;
 
     @Column(name = "highest_education")
@@ -93,16 +92,13 @@ public class UserProfile {
     /**
      * Stored as JSON strings for flexibility
      */
-    @Lob
-    @Column(name = "top_skills_json")
+    @Column(name = "top_skills_json", columnDefinition = "TEXT")
     private String topSkillsJson;
 
-    @Lob
-    @Column(name = "experience_summary_json")
+    @Column(name = "experience_summary_json", columnDefinition = "TEXT")
     private String experienceSummaryJson;
 
-    @Lob
-    @Column(name = "education_summary_json")
+    @Column(name = "education_summary_json", columnDefinition = "TEXT")
     private String educationSummaryJson;
 
     /**

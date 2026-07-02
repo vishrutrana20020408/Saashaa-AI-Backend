@@ -61,6 +61,10 @@ public class SecurityConfig {
                         // Allow browser preflight requests
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
+                        // Public health and diagnostics endpoints used by deployment checks and frontend startup probes
+                        .requestMatchers("/api/health/**").permitAll()
+                        .requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
+
                         // Authenticated current-user endpoint: allow anonymous checks so the frontend can
                         // gracefully handle missing or invalid sessions without a 403 response.
                         .requestMatchers(HttpMethod.GET, "/api/auth/me").permitAll()

@@ -2,9 +2,11 @@ backend\ai_interview\dto\response\GitHubProjectAnalysisResponse$RepositoryFileIn
 backend\ai_interview\service\integration\ai\InterviewClient$InterviewEvaluationResult.class
 backend\ai_interview\service\JobService.class
 backend\ai_interview\service\github\GitHubAnalysisService$ParsedGitHubRepo.class
+backend\ai_interview\entity\ResumeCloudFile.class
 backend\ai_interview\service\interview\InterviewSessionService.class
 backend\ai_interview\service\resume\ResumeAtsService.class
 backend\ai_interview\service\resume\ResumeVersionService.class
+backend\ai_interview\entity\Notification$NotificationBuilder.class
 backend\ai_interview\util\ResumeContentMapper$1.class
 backend\ai_interview\dto\response\AdminProfileResponse.class
 backend\ai_interview\dto\response\ResumeScanResponse.class
@@ -18,7 +20,10 @@ backend\ai_interview\dto\response\InterviewQuestionResponse.class
 backend\ai_interview\util\ProfileFieldNormalizer.class
 backend\ai_interview\config\AiEngineConfig.class
 backend\ai_interview\service\integration\ai\InterviewClient$InterviewStartResult.class
+backend\ai_interview\controller\AdminOnboardingController.class
 backend\ai_interview\service\resume\AtsScoringService.class
+backend\ai_interview\service\AdminOnboardingService$1.class
+backend\ai_interview\dto\response\AdminOnboardingResponse.class
 backend\ai_interview\entity\ToolRequirementAnswer.class
 backend\ai_interview\exception\StorageOperationException.class
 backend\ai_interview\dto\request\ToolKnowledgeAnswerRequest.class
@@ -28,6 +33,7 @@ backend\ai_interview\exception\GlobalExceptionHandler.class
 backend\ai_interview\dto\request\InterviewHintRequest.class
 backend\ai_interview\service\resume\ResumeEditorService$1.class
 backend\ai_interview\entity\ResumeVersion.class
+backend\ai_interview\service\auth\CaptchaVerificationService.class
 backend\ai_interview\service\profile\ProfileDocumentService.class
 backend\ai_interview\config\JacksonConfig.class
 backend\ai_interview\config\AwsS3Config.class
@@ -37,6 +43,7 @@ backend\ai_interview\controller\InterviewSessionController.class
 backend\ai_interview\dto\response\UserOnboardingResponse$UserOnboardingResponseBuilder.class
 backend\ai_interview\controller\JobController.class
 backend\ai_interview\service\auth\CompanyAuthService.class
+backend\ai_interview\dto\request\AdminOnboardingRequest.class
 backend\ai_interview\service\resume\ResumePreviewService$1.class
 backend\ai_interview\dto\request\InterviewEvaluateRequest.class
 backend\ai_interview\repository\InterviewSessionRepository.class
@@ -46,6 +53,7 @@ backend\ai_interview\entity\AdminProfile.class
 backend\ai_interview\dto\response\UserProfileResponse.class
 backend\ai_interview\exception\ResumeParsingException.class
 backend\ai_interview\entity\InternalJobApplication.class
+backend\ai_interview\service\auth\CaptchaVerificationService$1.class
 backend\ai_interview\dto\request\ResumeCreateRequest$ProjectItem.class
 backend\ai_interview\entity\JobApplication$JobApplicationBuilder.class
 backend\ai_interview\dto\request\InterviewAnswerRequest.class
@@ -58,6 +66,7 @@ backend\ai_interview\repository\UserRepository.class
 backend\ai_interview\util\mapper\AdminProfileMapper.class
 backend\ai_interview\entity\AppUser$Builder.class
 backend\ai_interview\entity\enums\JobApplicationStatus.class
+backend\ai_interview\service\resume\ResumeCloudStorageService.class
 backend\ai_interview\dto\response\ResumeEditorResponse.class
 backend\ai_interview\service\storage\S3StorageService.class
 backend\ai_interview\entity\enums\ProfileSourceType.class
@@ -65,7 +74,10 @@ backend\ai_interview\exception\GitHubAnalysisException.class
 backend\ai_interview\service\resume\ResumePreviewService.class
 backend\ai_interview\exception\InterviewSessionException.class
 backend\ai_interview\App.class
+backend\ai_interview\service\AdminOnboardingService.class
 backend\ai_interview\service\resume\ResumeService.class
+backend\ai_interview\controller\InterviewFaceCheckController.class
+backend\ai_interview\dto\response\AdminOnboardingResponse$AdminOnboardingResponseBuilder.class
 backend\ai_interview\service\interview\InterviewEvaluationService.class
 backend\ai_interview\controller\AdminResumeController.class
 backend\ai_interview\exception\ResumeNotFoundException.class
@@ -75,6 +87,7 @@ backend\ai_interview\exception\AiIntegrationException.class
 backend\ai_interview\dto\request\AdminProfileUpdateRequest.class
 backend\ai_interview\service\integration\ai\InterviewClient$InterviewHintResult.class
 backend\ai_interview\dto\request\OwnerRegisterRequest.class
+backend\ai_interview\service\NotificationService.class
 backend\ai_interview\dto\response\ResumePreviewResponse.class
 backend\ai_interview\exception\ResumePdfGenerationException.class
 backend\ai_interview\service\resume\SkillExtractionService.class
@@ -88,6 +101,7 @@ backend\ai_interview\controller\JobApplicationController.class
 backend\ai_interview\dto\request\ProfilePreferenceUpdateRequest.class
 backend\ai_interview\service\integration\ai\InterviewClient$InterviewFinalScoreResult.class
 backend\ai_interview\dto\response\ProfileSummaryResponse.class
+backend\ai_interview\repository\ResumeCloudFileRepository.class
 backend\ai_interview\service\resume\ResumeProfileExtractionService.class
 backend\ai_interview\util\FilePathUtil.class
 backend\ai_interview\dto\response\ResumeResponse.class
@@ -105,7 +119,9 @@ backend\ai_interview\service\resume\ResumeTailoringService.class
 backend\ai_interview\util\ShareIdGenerator.class
 backend\ai_interview\dto\response\AuthResponse.class
 backend\ai_interview\service\resume\ResumePdfGenerationService.class
+backend\ai_interview\entity\Owner$OwnerBuilder.class
 backend\ai_interview\controller\UserOnboardingController.class
+backend\ai_interview\repository\NotificationRepository.class
 backend\ai_interview\util\mapper\JobApplicationMapper.class
 backend\ai_interview\repository\AdminRepository.class
 backend\ai_interview\dto\response\ResumeVersionResponse.class
@@ -130,6 +146,7 @@ backend\ai_interview\repository\ResumeFileAssetRepository.class
 backend\ai_interview\dto\response\InterviewSessionResponse$InterviewTurn.class
 backend\ai_interview\entity\enums\ResumeStatus.class
 backend\ai_interview\service\integration\ai\GitHubAnalysisClient$GitHubAnalysisResult.class
+backend\ai_interview\controller\OwnerDashboardController.class
 backend\ai_interview\entity\InternalJobApplication$InternalJobApplicationBuilder.class
 backend\ai_interview\dto\request\ProfileSyncFromResumeRequest.class
 backend\ai_interview\entity\Resume.class
@@ -137,6 +154,8 @@ backend\ai_interview\dto\request\CompanyRegisterRequest.class
 backend\ai_interview\service\interview\InterviewRealtimeService.class
 backend\ai_interview\dto\response\GitHubProjectAnalysisResponse.class
 backend\ai_interview\repository\ToolRequirementAnswerRepository.class
+backend\ai_interview\repository\OwnerRepository.class
+backend\ai_interview\controller\ProfileDocumentController.class
 backend\ai_interview\util\ResumeFileValidator.class
 backend\ai_interview\entity\enums\InterviewMode.class
 backend\ai_interview\service\integration\ai\ResumeTailoringClient$ResumeTailoringResult.class
@@ -147,8 +166,10 @@ backend\ai_interview\service\auth\UserAuthService.class
 backend\ai_interview\dto\response\FileUploadResponse.class
 backend\ai_interview\controller\OwnerAuthController.class
 backend\ai_interview\dto\response\ResumeProfileSnapshotResponse.class
+backend\ai_interview\controller\SpeechProxyController.class
 backend\ai_interview\security\UserDetailsServiceImpl.class
 backend\ai_interview\service\github\GitHubAnalysisService.class
+backend\ai_interview\controller\NotificationController.class
 backend\ai_interview\entity\AppUser.class
 backend\ai_interview\controller\UserJobApplicationController.class
 backend\ai_interview\dto\request\ResumeSectionUpdateRequest.class
@@ -204,7 +225,9 @@ backend\ai_interview\entity\ResumeFileAsset.class
 backend\ai_interview\entity\enums\ResumeVersionType.class
 backend\ai_interview\exception\ProfileNotFoundException.class
 backend\ai_interview\repository\ResumeSectionRepository.class
+backend\ai_interview\entity\Notification.class
 backend\ai_interview\dto\request\ResumeCreateRequest.class
+backend\ai_interview\entity\Owner.class
 backend\ai_interview\security\Roles.class
 backend\ai_interview\security\JwtAuthFilter.class
 backend\ai_interview\service\resume\ResumeStorageService.class
@@ -216,6 +239,7 @@ backend\ai_interview\dto\response\GitHubProjectAnalysisResponse$RepositoryMetada
 backend\ai_interview\dto\response\InterviewSessionResponse.class
 backend\ai_interview\service\MockJobStore.class
 backend\ai_interview\config\SecurityConfig.class
+backend\ai_interview\controller\ResumeCloudStorageController.class
 backend\ai_interview\service\FileGenerationService$1.class
 backend\ai_interview\dto\request\JobApplicationCreateRequest.class
 backend\ai_interview\repository\UserProfileRepository.class

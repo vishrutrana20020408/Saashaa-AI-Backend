@@ -53,7 +53,7 @@ public class ResumeCloudFile {
     @Column(name = "mime_type", length = 100)
     private String mimeType;
 
-    @Column(name = "encrypted_content", columnDefinition = "LONGBLOB", nullable = false)
+    @Column(name = "encrypted_content", columnDefinition = "BYTEA", nullable = false)
     private byte[] encryptedContent;
 
     @Column(name = "checksum", nullable = false, length = 64)

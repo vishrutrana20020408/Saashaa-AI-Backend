@@ -1,3 +1,7 @@
 D:\Project AI Interview\backend\ai_interview\src\test\java\backend\ai_interview\AppTest.java
 D:\Project AI Interview\backend\ai_interview\src\test\java\backend\ai_interview\controller\InterviewSessionControllerTest.java
+D:\Project AI Interview\backend\ai_interview\src\test\java\backend\ai_interview\controller\JobControllerTest.java
+D:\Project AI Interview\backend\ai_interview\src\test\java\backend\ai_interview\ProjectIntegrationTest.java
 D:\Project AI Interview\backend\ai_interview\src\test\java\backend\ai_interview\service\integration\ai\InterviewClientTest.java
+D:\Project AI Interview\backend\ai_interview\src\test\java\backend\ai_interview\service\JobServiceTest.java
+D:\Project AI Interview\backend\ai_interview\src\test\java\backend\ai_interview\SystemConnectivityTest.java

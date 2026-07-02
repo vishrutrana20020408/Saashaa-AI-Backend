@@ -8,6 +8,7 @@ D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\config\WebSocketConfig.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\controller\AdminAuthController.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\controller\AdminDashboardController.java
+D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\controller\AdminOnboardingController.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\controller\AdminProfileController.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\controller\AdminResumeController.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\controller\AuthMeController.java
@@ -22,6 +23,8 @@ D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\controller\NotificationController.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\controller\OwnerAuthController.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\controller\OwnerDashboardController.java
+D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\controller\ProfileDocumentController.java
+D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\controller\ResumeCloudStorageController.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\controller\ResumeTailoringController.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\controller\ResumeVersionController.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\controller\SpeechProxyController.java
@@ -34,6 +37,7 @@ D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\controller\UserResumeController.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\dto\request\AdminJobApplyRequest.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\dto\request\AdminLoginRequest.java
+D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\dto\request\AdminOnboardingRequest.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\dto\request\AdminProfileUpdateRequest.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\dto\request\AdminRegisterRequest.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\dto\request\CompanyLoginRequest.java
@@ -60,6 +64,7 @@ D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\dto\request\UserOnboardingRequest.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\dto\request\UserProfileUpdateRequest.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\dto\request\UserRegisterRequest.java
+D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\dto\response\AdminOnboardingResponse.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\dto\response\AdminProfileResponse.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\dto\response\ApiResponse.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\dto\response\AuthResponse.java
@@ -103,6 +108,7 @@ D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\entity\Notification.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\entity\Owner.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\entity\Resume.java
+D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\entity\ResumeCloudFile.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\entity\ResumeFileAsset.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\entity\ResumeSection.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\entity\ResumeVersion.java
@@ -136,6 +142,7 @@ D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\repository\JobRepository.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\repository\NotificationRepository.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\repository\OwnerRepository.java
+D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\repository\ResumeCloudFileRepository.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\repository\ResumeFileAssetRepository.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\repository\ResumeRepository.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\repository\ResumeSectionRepository.java
@@ -147,7 +154,9 @@ D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\security\JwtService.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\security\Roles.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\security\UserDetailsServiceImpl.java
+D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\service\AdminOnboardingService.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\service\auth\AdminAuthService.java
+D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\service\auth\CaptchaVerificationService.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\service\auth\CompanyAuthService.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\service\auth\OwnerAuthService.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\service\auth\PasswordService.java
@@ -175,6 +184,7 @@ D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\service\profile\UserProfileService.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\service\resume\AtsScoringService.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\service\resume\ResumeAtsService.java
+D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\service\resume\ResumeCloudStorageService.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\service\resume\ResumeEditorService.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\service\resume\ResumeParserService.java
 D:\Project AI Interview\backend\ai_interview\src\main\java\backend\ai_interview\service\resume\ResumePdfGenerationService.java

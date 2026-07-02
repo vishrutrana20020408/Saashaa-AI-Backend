@@ -1,0 +1,7 @@
+backend\ai_interview\SystemConnectivityTest.class
+backend\ai_interview\service\integration\ai\InterviewClientTest.class
+backend\ai_interview\AppTest.class
+backend\ai_interview\service\JobServiceTest.class
+backend\ai_interview\controller\JobControllerTest.class
+backend\ai_interview\ProjectIntegrationTest.class
+backend\ai_interview\controller\InterviewSessionControllerTest.class

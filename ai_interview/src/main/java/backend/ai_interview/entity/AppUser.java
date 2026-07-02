@@ -550,12 +550,10 @@ public class AppUser {
     @Column(name = "onb_subdomain_single")
     private String onboardingSubDomainSingle;
 
-    @Lob
-    @Column(name = "onb_subdomain_multi")
+    @Column(name = "onb_subdomain_multi", columnDefinition = "TEXT")
     private String onboardingSubDomainMulti;
 
-    @Lob
-    @Column(name = "onb_job_titles")
+    @Column(name = "onb_job_titles", columnDefinition = "TEXT")
     private String onboardingJobTitles;
 
     @Column(name = "onb_done", nullable = false)
@@ -574,8 +572,7 @@ public class AppUser {
     @Column(name = "profile_location")
     private String profileLocation;
 
-    @Lob
-    @Column(name = "profile_summary")
+    @Column(name = "profile_summary", columnDefinition = "TEXT")
     private String profileSummary;
 
     @Column(name = "linkedin_url", length = 1000)
@@ -590,22 +587,19 @@ public class AppUser {
     @Column(name = "current_company")
     private String currentCompany;
 
-    @Column(name = "current_role")
+    @Column(name = "current_job_role")
     private String currentRole;
 
     @Column(name = "highest_education")
     private String highestEducation;
 
-    @Lob
-    @Column(name = "top_skills_json")
+    @Column(name = "top_skills_json", columnDefinition = "TEXT")
     private String topSkillsJson;
 
-    @Lob
-    @Column(name = "experience_summary_json")
+    @Column(name = "experience_summary_json", columnDefinition = "TEXT")
     private String experienceSummaryJson;
 
-    @Lob
-    @Column(name = "education_summary_json")
+    @Column(name = "education_summary_json", columnDefinition = "TEXT")
     private String educationSummaryJson;
 
     @Column(name = "profile_source_type")

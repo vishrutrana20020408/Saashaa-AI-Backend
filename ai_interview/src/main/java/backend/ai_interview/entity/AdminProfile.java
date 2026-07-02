@@ -78,15 +78,13 @@ public class AdminProfile {
     @Column(name = "portfolio_url", length = 1000)
     private String portfolioUrl;
 
-    @Lob
-    @Column(name = "profile_summary")
+    @Column(name = "profile_summary", columnDefinition = "TEXT")
     private String profileSummary;
 
     /**
      * Stored as JSON string for flexibility
      */
-    @Lob
-    @Column(name = "top_skills_json")
+    @Column(name = "top_skills_json", columnDefinition = "TEXT")
     private String topSkillsJson;
 
     /**
