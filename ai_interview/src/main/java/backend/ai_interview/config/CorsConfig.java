@@ -34,7 +34,9 @@ public class CorsConfig {
                                 "http://127.0.0.1:3000",
                                 "http://localhost:8080",
                                 "http://127.0.0.1:8080",
-                                "https://*.vercel.app"
+                                "https://*.vercel.app",
+                                "https://saashaa-ai-frontend.vercel.app",
+                                "https://*.onrender.com"
                         )
 
                         // ✅ Needed for onboarding + resume upload + all APIs
@@ -62,7 +64,9 @@ public class CorsConfig {
                 "http://127.0.0.1:3000",
                 "http://localhost:8080",
                 "http://127.0.0.1:8080",
-                "https://*.vercel.app"
+                "https://*.vercel.app",
+                "https://saashaa-ai-frontend.vercel.app",
+                "https://*.onrender.com"
         ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList(
