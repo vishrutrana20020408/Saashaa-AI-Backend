@@ -1,7 +1,12 @@
 package backend.ai_interview.config;
 
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -27,24 +32,8 @@ public class CorsConfig {
                         .allowedOriginPatterns(
                                 "http://localhost:3000",
                                 "http://127.0.0.1:3000",
-                                "http://192.168.*.*:3000",
-                                "http://10.*.*.*:3000",
-                                "http://172.16.*.*:3000",
-                                "http://172.17.*.*:3000",
-                                "http://172.18.*.*:3000",
-                                "http://172.19.*.*:3000",
-                                "http://172.20.*.*:3000",
-                                "http://172.21.*.*:3000",
-                                "http://172.22.*.*:3000",
-                                "http://172.23.*.*:3000",
-                                "http://172.24.*.*:3000",
-                                "http://172.25.*.*:3000",
-                                "http://172.26.*.*:3000",
-                                "http://172.27.*.*:3000",
-                                "http://172.28.*.*:3000",
-                                "http://172.29.*.*:3000",
-                                "http://172.30.*.*:3000",
-                                "http://172.31.*.*:3000",
+                                "http://localhost:8080",
+                                "http://127.0.0.1:8080",
                                 "https://*.vercel.app"
                         )
 
@@ -52,13 +41,7 @@ public class CorsConfig {
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
 
                         // ✅ Must include Authorization (JWT) and accept multipart uploads
-                        .allowedHeaders(
-                                "Authorization",
-                                "Content-Type",
-                                "Accept",
-                                "Origin",
-                                "X-Requested-With"
-                        )
+                        .allowedHeaders("*")
 
                         // ✅ If you ever return token in header
                         .exposedHeaders("Authorization")
@@ -69,5 +52,33 @@ public class CorsConfig {
                         .maxAge(3600);
             }
         };
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOriginPatterns(Arrays.asList(
+                "http://localhost:3000",
+                "http://127.0.0.1:3000",
+                "http://localhost:8080",
+                "http://127.0.0.1:8080",
+                "https://*.vercel.app"
+        ));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList(
+                "Authorization",
+                "Content-Type",
+                "Accept",
+                "Origin",
+                "X-Requested-With",
+                "Access-Control-Request-Method",
+                "Access-Control-Request-Headers"
+        ));
+        configuration.setExposedHeaders(Arrays.asList("Authorization"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }
