@@ -41,7 +41,6 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         String token = resolveToken(request);
 
-        // If no token, continue (public endpoints still work)
         if (token == null || token.isEmpty()) {
             filterChain.doFilter(request, response);
             return;

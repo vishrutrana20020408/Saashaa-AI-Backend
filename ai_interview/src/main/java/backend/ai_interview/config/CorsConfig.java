@@ -40,7 +40,7 @@ public class CorsConfig {
                         )
 
                         // ✅ Needed for onboarding + resume upload + all APIs
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
 
                         // ✅ Must include Authorization (JWT) and accept multipart uploads
                         .allowedHeaders("*")
@@ -68,7 +68,7 @@ public class CorsConfig {
                 "https://saashaa-ai-frontend.vercel.app",
                 "https://*.onrender.com"
         ));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList(
                 "Authorization",
                 "Content-Type",

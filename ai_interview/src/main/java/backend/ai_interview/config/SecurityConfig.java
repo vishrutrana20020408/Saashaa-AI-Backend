@@ -7,11 +7,14 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import backend.ai_interview.security.JwtAuthFilter;
 import backend.ai_interview.security.Roles;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Spring Security Configuration
@@ -45,6 +48,16 @@ public class SecurityConfig {
     }
 
     @Bean
+    public AuthenticationEntryPoint authenticationEntryPoint() {
+        return (request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return (request, response, accessDeniedException) -> response.sendError(HttpServletResponse.SC_FORBIDDEN, "Forbidden");
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
@@ -56,14 +69,21 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
 
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(authenticationEntryPoint())
+                        .accessDeniedHandler(accessDeniedHandler())
+                )
+
                 .authorizeHttpRequests(auth -> auth
 
                         // Allow browser preflight requests
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-                        // Public health and diagnostics endpoints used by deployment checks and frontend startup probes
+                        // Public root, health, and diagnostics endpoints used by deployment checks and frontend startup probes
+                        .requestMatchers(HttpMethod.GET, "/").permitAll()
                         .requestMatchers("/api/health/**").permitAll()
                         .requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
+                        .requestMatchers("/error").permitAll()
 
                         // Authenticated current-user endpoint: allow anonymous checks so the frontend can
                         // gracefully handle missing or invalid sessions without a 403 response.
@@ -87,7 +107,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/speech/**").permitAll()
                         .requestMatchers("/api/profile/documents/view/**").authenticated()
                         .requestMatchers("/api/user/**").hasRole(Roles.USER)
-                        
+
                         // Everything else requires authentication
                         .anyRequest().authenticated()
                 )
